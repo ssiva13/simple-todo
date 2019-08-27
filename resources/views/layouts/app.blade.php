@@ -27,15 +27,15 @@
 
     <body>
         <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-green shadow-sm">
+            <nav class="navbar navbar-expand-md shadow-sm" style="background:#fff; color:#fff">
                 <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
+                        <span style="color:308c"><i class="fas fa-bars"></i></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -45,7 +45,7 @@
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="{{ route('welcome') }}">Laravel Page</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                             
@@ -66,9 +66,10 @@
                             @endif
                             @else
                             <li class="nav-item dropdown">
+                                {{-- <i class="fas fa-user"></i> --}}
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <span class="fas fa-user"></span> {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -94,7 +95,7 @@
             </nav>
 
             <main class="container mt-4 w-100">
-                @include('includes.messages')
+                {{-- @include('includes.messages') --}}
                 @yield('content')
             </main>
         </div>

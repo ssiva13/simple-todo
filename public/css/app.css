@@ -5554,6 +5554,13 @@ button.close {
 
 .modal-header {
     display: flex;
+    background: #f7f5f5;
+    text-transform: uppercase;
+    color: #08c;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    font-family: Nunito, sans-serif;
+    font-size: 30px;
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem;

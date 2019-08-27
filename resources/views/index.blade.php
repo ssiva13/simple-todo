@@ -4,12 +4,8 @@
 <div class="container text-center">
     <div class="row justify-content-center">
         <div class="col-md-12">
-
-            <div class="container w-100"><h1 style="color:#08c;"><strong>TO-DO APP</strong></h1></div>
-
-            <div class="container d-flex text-">
-                <div>
-                </div>
+            <div class="mb-3 mt-10" style="font-size: 100px;">
+                    <strong style="color:#08c;">TO-DO APP</strong>
             </div>
         </div>
 

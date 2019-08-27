@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Helper\Table;
 
 class TaskController extends Controller
 {
@@ -132,6 +133,46 @@ class TaskController extends Controller
         $tasks = Task::orderBy('id', 'desc')->paginate(10);
         
         return \redirect('home')->with('tasks', $tasks)->with('success','Task Edited Successfully');
+    }
+
+    // mark task complete and move duration to description
+    public function complete(Request $request, Task $task)
+    {
+        //get inputs
+        $description = $task->description;
+        $duration = $task->duration;
+
+        if($duration != 0){
+            $task->description = "\n Task Completed In : " .$duration. " hours \n Description <p>" .$description. "</p>";
+            $task->duration = 0;
+
+            $task->save();
+
+        }
+        else{
+            $tasks = Task::orderBy('id', 'desc')->paginate(10);
+            return \redirect('home')->with('tasks', $tasks)->with('error','Task Already Complete');
+        }
+
+        
+
+        $task_json = \json_encode($task); //to return task details in json
+
+        $tasks = Task::orderBy('id', 'desc')->paginate(10);
+        
+        return \redirect('home')->with('tasks', $tasks)->with('success','Task Marked Complete');
+    }
+    // mark task complete and move duration to description
+    public function search(Request $request)
+    {
+        $number = 0;
+        //get inputs
+        $search = '%'.$request->task.'%';
+        $result = Task::orderBy('id')->where('title', 'like', $search )->get();
+
+        // return $result;
+        return \view('home')->with('tasks',$result)->with('number',$number);
+        
     }
 
     /**

@@ -5,20 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
 
-            <div class="container w-100">
+            <div class="container w-50">
                 <h1><strong>Dashboard</strong></h1>
+                @include('includes.messages')
             </div>
             <div class="container d-flex row">
                 <div class="w-50 d-flex bd-highlight">
-                    <div class="ml-8" >
+                    <div class="ml-8">
                         <a class="btn btn-info m-1" href="tasks/create">Add Task</a>
                     </div>
                 </div>
                 <div class="w-50 d-flex bd-highlight">
                     <div class="ml-4">
-                        <form class="navbar-form navbar-left" action="">
+                        <form class="navbar-form navbar-left" action="{{route('search')}}" method="GET">
+                            {{-- @method('PUT') --}}
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" name="task" class="form-control" placeholder="Search">
                                 <div class="ml-3 input-group-btn">
                                     <button class="btn btn-info" type="submit">
                                         <span>Search for task</span>
@@ -29,20 +31,20 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <table class="table table-hover ">
+            <div class="container text-center">
+                <table class="table table-hover table-responsive">
                     <caption>List of Tasks</caption>
                     <thead class="thead-dark bg-dark">
                         <th><span>Number</span></th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Time</th>
-                        <th>Duration</th>
-                        <th colspan="2">Action</th>
+                        <th><span>Name</span></th>
+                        <th><span>Description</span></th>
+                        <th><span>Time</span></th>
+                        <th><span>Duration</span></th>
+                        <th><span>Status</span></th>
+                        <th colspan="2"><span>Action</span></th>
                     </thead>
                     <tbody>
                         @if (count($tasks) > 0 )
-                        {{-- {{$number = 0}} --}}
                         @foreach ($tasks as $task)
                         <tr>
                             {{-- <td>{{$task->id}}</td> --}}
@@ -50,7 +52,24 @@
                             <td>{{$task->title}}</td>
                             <td>{{$task->description}}</td>
                             <td>{{$task->time}} hrs</td>
-                            <td>{{$task->duration}} hours</td>
+                            <td>
+                                @if (($task->duration == 0))
+                                N/A
+                                @else
+                                {{$task->duration}} hours
+                                @endif
+                            </td>
+                            <td>
+                                <form method="POST" action="{{url('complete',$task->id)}}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <button class="btn @if($task->duration != 0) btn-warning @else btn-success @endif">
+                                        @if($task->duration
+                                        != 0) Pending @else Complete @endif</button>
+                                </form>
+
+                            </td>
                             <td>
                                 <a href="/tasks/{{$task->id}}" class="btn btn-info">Edit</a>
                             </td>

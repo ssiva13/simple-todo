@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group row ">
                             <label for="description"><strong>{{ __('Task Description :') }}</strong></label>
-                            <textarea type="text" name="description" class="form-control" value="{{$task->description}}" placeholder="{{$task->description}}" required></textarea>
+                            <textarea type="text" name="description" class="form-control" value="{{$task->description}}" placeholder="{{$task->description}}" required>{{$task->description}}</textarea>
                     </div>
                     <div class="d-flex" >
                     <div class="form-group row ml-2 mr-3 w-50">
@@ -25,7 +25,10 @@
                     </div>
                     <div class="form-group text-left w-50">
                             <label for="duration"><strong>{{ __('Task Duration :') }}</strong></label>
-                            <input type="number" name="duration" class="form-control" value="{{$task->duration}}" required>
+                            <input type="number" name="duration" class="form-control" @if ($task->duration == '') value="0"
+                                @else
+                                value= "{{$task->duration}}"
+                                @endif required>
                     </div>
                     </div>
                     <div class="form-group text-right ">

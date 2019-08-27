@@ -22,3 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //Task Resource
 Route::resource('tasks', 'TaskController');
+
+//route to mark completion
+Route::put('complete/{task}', 'TaskController@complete')->name('complete');
+
+//route to search task
+Route::get('search', 'TaskController@search')->name('search');
