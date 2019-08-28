@@ -71,7 +71,7 @@
 
                             </td>
                             <td>
-                                <a href="/tasks/{{$task->id}}" class="btn btn-info">Edit</a>
+                                <a href="/tasks/{{$task->id}}" class="btn btn-info @if($task->duration == 0) disabled @endif" >Edit</a>
                             </td>
                             <td>
                                 <form method="POST" action="{{url('tasks', [$task->id])}}"
