@@ -12,6 +12,7 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/messages.js') }}"></script>
         <script src="https://kit.fontawesome.com/733c82d02f.js"></script>
 
         <!-- Fonts -->
